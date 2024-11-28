@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://ct2qmst4q3n5b"]
+
+[ext_resource type="Script" path="res://src/global/node/state_node.gd" id="1_6s8b4"]
+[ext_resource type="Script" path="res://src/scene/player.gd" id="1_xrw3x"]
+[ext_resource type="Script" path="res://src/global/node/skill_actuator.gd" id="2_2yjjc"]
+[ext_resource type="Script" path="res://src/global/node/platform_controller.gd" id="3_wl0ii"]
+[ext_resource type="SpriteFrames" uid="uid://dyr5lidhh7gi4" path="res://src/assets/player_anim.tres" id="5_ht7pa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coak5"]
+size = Vector2(48, 48)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_xrw3x")
+metadata/_edit_group_ = true
+
+[node name="StateNode" type="Node" parent="."]
+script = ExtResource("1_6s8b4")
+
+[node name="SkillActuator" type="Node" parent="."]
+script = ExtResource("2_2yjjc")
+
+[node name="PlatformController" type="Node2D" parent="." node_paths=PackedStringArray("host")]
+script = ExtResource("3_wl0ii")
+host = NodePath("../body")
+jump_height = 600.0
+gravity_rate = 1.0
+gravity_max = 1500.0
+move_speed = 200.0
+
+[node name="body" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body"]
+shape = SubResource("RectangleShape2D_coak5")
+
+[node name="StateLabel" type="Label" parent="body"]
+offset_left = -20.0
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = -37.0
+horizontal_alignment = 1
+
+[node name="Picture" type="Node2D" parent="body"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="body/Picture"]
+position = Vector2(0, -12)
+sprite_frames = ExtResource("5_ht7pa")
+animation = &"剑_站立"
+
+[connection signal="direction_changed" from="PlatformController" to="." method="_on_platform_controller_direction_changed"]
+[connection signal="move_state_changed" from="PlatformController" to="." method="_on_platform_controller_move_state_changed"]

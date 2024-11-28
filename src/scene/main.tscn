@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp3ykkufsjuol"]
+
+[ext_resource type="PackedScene" uid="uid://ct2qmst4q3n5b" path="res://src/scene/player.tscn" id="1_1bjxi"]
+[ext_resource type="Script" path="res://src/scene/main.gd" id="1_6im3w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uesx4"]
+size = Vector2(1152, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tymts"]
+size = Vector2(45, 77)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_6im3w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Skill_A" type="Button" parent="CanvasLayer"]
+offset_left = 888.0
+offset_top = 488.0
+offset_right = 984.0
+offset_bottom = 576.0
+focus_mode = 0
+text = "A"
+
+[node name="Skill_B" type="Button" parent="CanvasLayer"]
+offset_left = 1000.0
+offset_top = 488.0
+offset_right = 1096.0
+offset_bottom = 576.0
+focus_mode = 0
+text = "B"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_top = 576.0
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="ColorRect2" type="ColorRect" parent="StaticBody2D"]
+offset_left = 1.0
+offset_top = 500.0
+offset_right = 46.0
+offset_bottom = 577.0
+
+[node name="ColorRect3" type="ColorRect" parent="StaticBody2D"]
+offset_left = 1.0
+offset_top = 500.0
+offset_right = 46.0
+offset_bottom = 577.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(576, 608)
+shape = SubResource("RectangleShape2D_uesx4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(23, 539)
+shape = SubResource("RectangleShape2D_tymts")
+
+[node name="ColorRect4" type="ColorRect" parent="StaticBody2D"]
+offset_left = 1106.0
+offset_top = 500.0
+offset_right = 1151.0
+offset_bottom = 577.0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1128, 539)
+shape = SubResource("RectangleShape2D_tymts")
+
+[node name="Player" parent="." instance=ExtResource("1_1bjxi")]
+position = Vector2(558, 446)
+
+[connection signal="pressed" from="CanvasLayer/Skill_A" to="." method="_on_skill_a_pressed"]
+[connection signal="pressed" from="CanvasLayer/Skill_B" to="." method="_on_skill_b_pressed"]
