@@ -52,7 +52,8 @@ func _ready() -> void:
 	# 每个技能结束时，自动执行下一个
 	skill_actuator.ended.connect(
 		func(skill_name: StringName, tag: StringName):
-			_execute_next_skill()
+			if skill_name in skill_data:
+				_execute_next_skill()
 	)
 	
 	# 更新普通状态播放的动画
@@ -77,7 +78,6 @@ func execute_skill(skill_name: String):
 			skill_actuator.execute(skill_name)
 			# 切换到执行技能状态
 			state_node.trans_to_child(StateName.SKILL)
-			
 			# 这个技能执行具体效果的小技能组
 			match skill_name:
 				SkillName.sword_a:
@@ -88,12 +88,8 @@ func execute_skill(skill_name: String):
 					_skill_queue.append("技能_龙卷风")
 					_skill_queue.append("技能_龙卷风_旋转")
 					_skill_queue.append("技能_龙卷风_结束")
-					_skill_queue.append("剑_螺旋刺")
-					_skill_queue.append("剑_螺旋刺_循环")
-					_skill_queue.append("剑_螺旋刺_结束")
 			# 开始执行小技能组
 			_execute_next_skill()
-			
 		else:
 			print_debug(skill_name, " 技能正在冷却中，剩余时间：", skill_actuator.get_skill(skill_name).get_time_left())
 
