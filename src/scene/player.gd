@@ -12,8 +12,7 @@ enum StateName {
 @onready var move_controller: PlatformController = $PlatformController
 
 @onready var body: CharacterBody2D = $body
-@onready var picture: Node2D = $body/Picture
-@onready var animated_sprite: AnimatedSprite2D = $body/Picture/AnimatedSprite2D
+@onready var animated_sprite: AnimatedSprite2D = $body/AnimatedSprite2D
 @onready var state_label: Label = $body/StateLabel
 
 # 添加状态
@@ -61,10 +60,11 @@ func _ready() -> void:
 
 ## 更新普通状态下的动画
 func update_normal_anim():
-	if move_controller.is_moving():
-		animated_sprite.play("剑_跑步")
-	else:
-		animated_sprite.play("剑_站立")
+	if normal_state.is_running():
+		if move_controller.is_moving():
+			animated_sprite.play("剑_跑步")
+		else:
+			animated_sprite.play("剑_站立")
 
 ## 面部朝向
 func get_face_direction() -> Vector2:

@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://ct2qmst4q3n5b"]
 
-[ext_resource type="Script" path="res://src/global/node/state_node.gd" id="1_6s8b4"]
-[ext_resource type="Script" path="res://src/scene/player.gd" id="1_xrw3x"]
-[ext_resource type="Script" path="res://src/global/node/skill_actuator.gd" id="2_2yjjc"]
-[ext_resource type="Script" path="res://src/global/node/platform_controller.gd" id="3_wl0ii"]
+[ext_resource type="Script" uid="uid://b8dgqdtsx6al1" path="res://src/global/node/state_node.gd" id="1_6s8b4"]
+[ext_resource type="Script" uid="uid://b3d7b8syproe0" path="res://src/scene/player.gd" id="1_xrw3x"]
+[ext_resource type="Script" uid="uid://cy63c52avl545" path="res://src/global/node/skill_actuator.gd" id="2_2yjjc"]
+[ext_resource type="Script" uid="uid://bdqbljxhmliwj" path="res://src/global/node/platform_controller.gd" id="3_wl0ii"]
 [ext_resource type="SpriteFrames" uid="uid://dyr5lidhh7gi4" path="res://src/assets/player_anim.tres" id="5_ht7pa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coak5"]
@@ -39,9 +39,7 @@ offset_right = 20.0
 offset_bottom = -37.0
 horizontal_alignment = 1
 
-[node name="Picture" type="Node2D" parent="body"]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="body/Picture"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="body"]
 position = Vector2(0, -12)
 sprite_frames = ExtResource("5_ht7pa")
 animation = &"剑_站立"
